@@ -53,6 +53,13 @@ $hotels = [
 
 <body>
     <div class="container">
+        <form class="mt-5 d-flex align-items-center" action="">
+            <label for="parking-filter" class="form-check-label pe-2">Parcheggi necessari:</label>
+            <input type="checkbox" class="form-check-input" id="parking-filter" name="parking-filter">
+
+            <button type="submit" class="btn btn-primary ms-3">Filtra</button>
+        </form>
+
         <table class="table mt-5">
             <thead>
                 <tr>
@@ -65,17 +72,29 @@ $hotels = [
             </thead>
             <tbody>
                 <?php foreach ($hotels as $hotel) : ?>
-                    <tr>
-                        <?php foreach ($hotel as $key => $value) : ?>
-                            <td>
-                                <?php
-                                if ($key == 'parking') {
-                                    echo $value ? 'Sì' : 'No';
-                                } else echo $value;
-                                ?>
-                            </td>
-                        <?php endforeach ?>
-                    </tr>
+                    <?php if (isset($_GET['parking-filter'])) : ?>
+                        <?php if ($hotel['parking']) : ?>
+                            <tr>
+                                <?php foreach ($hotel as $key => $value) : ?>
+                                    <td>
+                                        <?= $key == 'parking' ? 'Sì' : $value ?>
+                                    </td>
+                                <?php endforeach ?>
+                            </tr>
+                        <?php endif ?>
+                    <?php else : ?>
+                        <tr>
+                            <?php foreach ($hotel as $key => $value) : ?>
+                                <td>
+                                    <?php
+                                    if ($key == 'parking') {
+                                        echo $value ? 'Sì' : 'No';
+                                    } else echo $value;
+                                    ?>
+                                </td>
+                            <?php endforeach ?>
+                        </tr>
+                    <?php endif ?>
                 <?php endforeach ?>
             </tbody>
         </table>
