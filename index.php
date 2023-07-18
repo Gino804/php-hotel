@@ -48,23 +48,38 @@ $hotels = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <ul>
-        <?php foreach ($hotels as $hotel) : ?>
-            <?php foreach ($hotel as $key => $value) : ?>
-                <li><b><?= $key ?></b>:
-                    <?php
-                    if ($key == 'parking') {
-                        echo $value ? 'Sì' : 'No';
-                    } else echo $value;
-                    ?>
-                </li>
-            <?php endforeach ?>
-            <br>
-        <?php endforeach ?>
-    </ul>
+    <div class="container">
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrizione</th>
+                    <th>Parcheggio</th>
+                    <th>Valutazione</th>
+                    <th>Distanza dal centro</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($hotels as $hotel) : ?>
+                    <tr>
+                        <?php foreach ($hotel as $key => $value) : ?>
+                            <td>
+                                <?php
+                                if ($key == 'parking') {
+                                    echo $value ? 'Sì' : 'No';
+                                } else echo $value;
+                                ?>
+                            </td>
+                        <?php endforeach ?>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>
